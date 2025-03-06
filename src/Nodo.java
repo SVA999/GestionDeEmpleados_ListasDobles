@@ -1,14 +1,11 @@
-
-
 public class Nodo {
-    
-    int dato;
-    Nodo anterior;
+    Empleado empleado;
     Nodo siguiente;
+    Nodo anterior;
 
-    public Nodo(int dato){
-        this.dato=dato;
-        this.anterior=null;
-        this.siguiente=null;
+    public Nodo(Empleado empleado){
+        this.empleado=empleado;
+        siguiente=null;
+        anterior=null;
     }
 }
