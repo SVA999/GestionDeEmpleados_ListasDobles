@@ -1,21 +1,6 @@
-import java.util.InputMismatchException;
-
 import javax.swing.JOptionPane;
-//https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Java-user-input-with-a-Swing-JOptionPane-example
 
 public class Main {
-    /*
-     * public static final String
-     * RESET = "\u001B[0m",
-     * WHITE = "\u001B[37m",
-     * BLACK = "\u001B[30m",
-     * RED = "\u001B[31m",
-     * GREEN = "\u001B[32m",
-     * YELLOW = "\u001B[33m",
-     * BLUE = "\u001B[34m",
-     * PURPLE = "\u001B[35m",
-     * CYAN = "\u001B[36m";
-     */
 
     public static final float salarioMin = 1423500;
     public static int IdEmpleados = 0;
@@ -54,16 +39,29 @@ public class Main {
                         JOptionPane.showMessageDialog(null,
                                 lista.EliminarEmpleado(
                                         Integer.parseInt(JOptionPane.showInputDialog(null,
-                                                "¿Cuál es el ID del empleado a eliminar?"))));
-                        lista.Imprimir();
+                                                "¿Cuál es el ID del empleado a eliminar?\n")))
+                                        + lista.Imprimir());
+
                         break;
                     case 5:
-                        // ordenar por Nombre
-
+                        // Ordenar por Nombre
+                        JOptionPane.showMessageDialog(null,
+                                lista.OrdenarPorNombre(
+                                        Boolean.parseBoolean(JOptionPane.showInputDialog(null,
+                                                "Ordenamiento por Nombre: " + "\ntrue - Ordenamiento Ascendente"
+                                                        + "\nfalse - Ordenamiento Descendente\n")
+                                                .toLowerCase()))
+                                        + lista.Imprimir());
                         break;
                     case 6:
                         // Ordenar por Salario
-
+                        JOptionPane.showMessageDialog(null,
+                        lista.OrdenarPorSalario(
+                                Boolean.parseBoolean(JOptionPane.showInputDialog(null,
+                                        "Ordenamiento por Salario: " + "\ntrue - Ordenamiento Ascendente"
+                                                + "\nfalse - Ordenamiento Descendente\n")
+                                        .toLowerCase()))
+                                + "\n"+lista.Imprimir());
                         break;
                     case 7:
                         // Calcular promedio salario
@@ -81,6 +79,10 @@ public class Main {
                         // Obtener mediana de Salario
 
                         break;
+                    case 11:
+                        // Cargar datos
+                        JOptionPane.showMessageDialog(null, lista.CargarDatos());
+                        break;
                     case 0:
                         JOptionPane.showMessageDialog(null, "\tSaliendo del programa...");
                         break;
@@ -96,25 +98,26 @@ public class Main {
 
     // --------------------- METODOS ----------------------//
 
-    public static byte AbrirMenu(ListaDoble listaDoble) {
+    public static byte AbrirMenu(ListaDoble listaDoble) throws Exception{
         try {
 
             String sOpcion = JOptionPane.showInputDialog(
-                """
-                Menú:
-                1. Añadir empleado a la lista
-                2. Imprimir lista
-                3. Buscar dato
-                4. Eliminar dato
-                5. Mostrar características
-                6. Ordenar lista ascendente
-                7. Ordenar lista descendente
-                8. Calcular la suma de los datos
-                9. Calcular el producto de los datos
-                10. Calcular el Rango de los Datos
-                0. Salir
-                """ + listaDoble.MostrarCaracteristicas()
-            );
+                    """
+                            Menú:
+                            1. Añadir empleado a la lista
+                            2. Imprimir lista
+                            3. Buscar dato
+                            4. Eliminar dato
+                            5. Ordenar por nombre
+                            6. Ordenar por salario
+                            7. Ordenar lista descendente
+                            8. Calcular la suma de los datos
+                            9. Calcular el producto de los datos
+                            10. Calcular el Rango de los Datos
+
+                            11. Cargar datos
+                            0. Salir
+                            """ + listaDoble.MostrarCaracteristicas());
 
             if (sOpcion == null) {
                 return 0;
@@ -124,8 +127,8 @@ public class Main {
                 return Byte.parseByte(sOpcion);
             }
 
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Error al AbrirMenu:\n" + e);
+        } catch (Exception e) {
+            throw new Exception("Error al AbrirMenu:\n" + e);
         }
     }
 
