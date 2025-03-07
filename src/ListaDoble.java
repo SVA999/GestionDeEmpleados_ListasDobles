@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ListaDoble {
 
@@ -172,15 +170,17 @@ public class ListaDoble {
     // Método para mostrar estadísticas de la lista
     public String MostrarCaracteristicas() throws Exception {
         try {
-            String reString = "\n";
+            String reString = "";
             if (cabeza == null) {
                 return reString;
             }
+            reString += "\n|----- Estadisticas -----|\n";
             reString += "\n\tTotal empleados: " + contadorEmpleados;
+            reString += "\n\tSalario promedio: " + calcular_promedio_salario();
+            reString += "\n\t" + encontrar_salario_maximo(true);
+            reString += "\n\t" + encontrar_salario_minimo(true);
+            reString += "\t" + obtener_mediana_salario();
 
-            // System.out.println("empleado menor: " + minimo);
-            // System.out.println("empleado mayor: " + maximo);
-            // System.out.println("Promedio de los empleados: " + promedio);
             return reString;
 
         } catch (Exception e) {
@@ -197,7 +197,7 @@ public class ListaDoble {
             }
             Nodo actual;
             boolean intercambiado;
-            String temp;
+            Empleado temp;
 
             // Ordenamiento Asendente Defaut
             if (Asendente == true) {
@@ -208,9 +208,9 @@ public class ListaDoble {
                         // Comparar los nombres completos alfabéticamente
                         if (actual.empleado.nombre.compareTo(actual.siguiente.empleado.nombre) > 0) {
                             // Intercambiar los nombres
-                            temp = actual.empleado.nombre;
-                            actual.empleado.nombre = actual.siguiente.empleado.nombre;
-                            actual.siguiente.empleado.nombre = temp;
+                            temp = actual.empleado;
+                            actual.empleado = actual.siguiente.empleado;
+                            actual.siguiente.empleado = temp;
 
                             intercambiado = true;
                         }
@@ -228,29 +228,10 @@ public class ListaDoble {
                         // Comparar los nombres completos alfabéticamente
                         if (actual.empleado.nombre.compareTo(actual.siguiente.empleado.nombre) < 0) {
                             // Intercambiar los nombres
-                            temp = actual.empleado.nombre;
-                            actual.empleado.nombre = actual.siguiente.empleado.nombre;
-                            actual.siguiente.empleado.nombre = temp;
-
-                            /*
-                            // Intercambiar las conexiones de los nodos en la lista doblemente enlazada
-                            Nodo siguienteNodo = actual.siguiente;
-                            Nodo nodoAnterior = actual.anterior;
-
-                            // Actualizar las referencias de los nodos adyacentes
-                            if (nodoAnterior != null) {
-                                nodoAnterior.siguiente = siguienteNodo;
-                            }
-                            if (siguienteNodo.siguiente != null) {
-                                siguienteNodo.siguiente.anterior = actual;
-                            }
-
-                            // Intercambiar los punteros "anterior" y "siguiente"
-                            actual.siguiente = siguienteNodo.siguiente;
-                            siguienteNodo.anterior = actual.anterior;
-                            actual.anterior = siguienteNodo;
-                            siguienteNodo.siguiente = actual;
-                            */
+                            // Intercambiar los nombres
+                            temp = actual.empleado;
+                            actual.empleado = actual.siguiente.empleado;
+                            actual.siguiente.empleado = temp;
 
                             intercambiado = true;
                         }
@@ -275,7 +256,7 @@ public class ListaDoble {
             }
             Nodo actual;
             boolean intercambiado;
-            float temp;
+            Empleado temp;
 
             // Ordenamiento Asendente Defaut
             if (Asendente == true) {
@@ -286,9 +267,9 @@ public class ListaDoble {
                         // Comparar los salarios
                         if (actual.empleado.salario > actual.siguiente.empleado.salario) {
                             // Intercambiar los salarios
-                            temp = actual.empleado.salario;
-                            actual.empleado.salario = actual.siguiente.empleado.salario;
-                            actual.siguiente.empleado.salario = temp;
+                            temp = actual.empleado;
+                            actual.empleado = actual.siguiente.empleado;
+                            actual.siguiente.empleado = temp;
 
                             intercambiado = true;
                         }
@@ -300,15 +281,15 @@ public class ListaDoble {
 
             } else { // Ordenamiento Descendente
                 do {
-                    actual = cola;
+                    actual = cabeza;
                     intercambiado = false;
                     while (actual.siguiente != null) {
                         // Comparar los salarios
                         if (actual.empleado.salario < actual.siguiente.empleado.salario) {
                             // Intercambiar los salarios
-                            temp = actual.empleado.salario;
-                            actual.empleado.salario = actual.siguiente.empleado.salario;
-                            actual.siguiente.empleado.salario = temp;
+                            temp = actual.empleado;
+                            actual.empleado = actual.siguiente.empleado;
+                            actual.siguiente.empleado = temp;
 
                             intercambiado = true;
                         }
@@ -320,97 +301,186 @@ public class ListaDoble {
             }
 
         } catch (Exception e) {
-            throw new Exception("Error al MostrarCaracteristicas:\n" + e);
+            throw new Exception("Error al OrdenarPorSalario:\n" + e);
         }
     }
 
-    /*
-     * public int encontrarMaximo() {
-     * if (cabeza == null) {
-     * return Integer.MIN_VALUE; // Lista vacía
-     * }
-     * Nodo actual = cabeza;
-     * int maximo = cabeza.empleado;
-     * while (actual != null) {
-     * if (actual.empleado > maximo) {
-     * maximo = actual.empleado;
-     * }
-     * actual = actual.siguiente;
-     * }
-     * return maximo;
-     * }
-     * 
-     * public int encontrarMinimo() {
-     * if (cabeza == null) {
-     * return Integer.MAX_VALUE; // Lista vacía
-     * }
-     * Nodo actual = cabeza;
-     * int minimo = cabeza.empleado;
-     * while (actual != null) {
-     * if (actual.empleado < minimo) {
-     * minimo = actual.empleado;
-     * }
-     * actual = actual.siguiente;
-     * }
-     * return minimo;
-     * }
-     * 
-     * public String calcularSuma() {
-     * try {
-     * if (cabeza == null) {
-     * return "Lista vacía.";
-     * }
-     * 
-     * int total = 0;
-     * Nodo actual = cabeza;
-     * while (actual != null) {
-     * total += actual.empleado;
-     * actual = actual.siguiente;
-     * }
-     * 
-     * return "La suma de los empleados es: " + total;
-     * 
-     * } catch (Exception e) {
-     * throw new IllegalArgumentException("Error en empleados: " + e);
-     * }
-     * }
-     * 
-     * public String calcularProducto() {
-     * try {
-     * if (cabeza == null) {
-     * return "Lista vacía.";
-     * }
-     * 
-     * int total = 1;
-     * Nodo actual = cabeza;
-     * while (actual != null) {
-     * if (actual.empleado == 0) {
-     * actual = actual.siguiente;
-     * } else {
-     * total = total * actual.empleado;
-     * actual = actual.siguiente;
-     * }
-     * }
-     * return "El producto de los empleados es: " + total;
-     * 
-     * } catch (Exception e) {
-     * throw new IllegalArgumentException("Error en empleados: " + e);
-     * }
-     * }
-     * 
-     * public String calcularRango() {
-     * try {
-     * if (cabeza == null) {
-     * return "Lista vacía.";
-     * }
-     * int rango=0;
-     * rango = encontrarMinimo() - encontrarMaximo();
-     * 
-     * return "El rango es: " + rango;
-     * 
-     * } catch (Exception e) {
-     * throw new IllegalArgumentException("Error en empleados: " + e);
-     * }
-     * }
-     */
+    public String calcular_promedio_salario() throws Exception {
+
+        try {
+            // Verificar si la lista está vacía
+            if (cabeza == null) {
+                return "Lista vacía."; // Lanzar excepción si no hay empleados
+            }
+
+            double sumaSalarios = 0; // Variable para almacenar la suma de todos los salarios
+            Nodo actual = cabeza; // Puntero para recorrer la lista, comenzando desde la cabeza
+
+            // Recorrer la lista sumando los salarios de cada empleado
+            while (actual != null) {
+
+                sumaSalarios += actual.empleado.salario; // Sumar el salario del empleado actual
+                actual = actual.siguiente; // Avanzar al siguiente nodo
+            }
+
+            // Calcular y retornar el promedio (suma de salarios / número de empleados)
+            return ""+sumaSalarios / contadorEmpleados;
+
+        } catch (Exception e) {
+            // Manejar excepciones y lanzar un mensaje de error personalizado
+            throw new Exception("Error al calcular el promedio de salarios: " + e);
+        }
+    }
+
+    public String encontrar_salario_maximo() throws Exception {
+        try {
+            // Verificar si la lista está vacía
+            if (cabeza == null) {
+                return "Lista vacía."; // Lanzar excepción si no hay empleados
+            }
+
+            float maximo = cabeza.empleado.salario; // Inicializar con el salario del primer empleado
+            Nodo actual = cabeza; // Puntero para recorrer la lista, comenzando desde la cabeza
+            Nodo maxEmpleado = cabeza; // Guardará el nodo con el salario máximo
+
+            // Recorrer la lista para encontrar el salario máximo
+            while (actual != null) {
+                if (actual.empleado.salario > maximo) {
+                    maximo = actual.empleado.salario; // Actualizar el salario máximo si se encuentra uno mayor
+                    maxEmpleado = actual; // Guardar el nodo con el salario máximo
+                }
+                actual = actual.siguiente; // Avanzar al siguiente nodo
+            }
+
+            // Retornar el salario máximo encontrado
+            return "\nNombre: " + maxEmpleado.empleado.nombre + "\n" +
+                    "Salario: " + maximo;
+
+        } catch (Exception e) {
+            // Manejar excepciones y lanzar un mensaje de error personalizado
+            throw new Exception("Error al encontrar el salario máximo: " + e);
+        }
+    }
+
+    // Sobrecarga de Salario Max para mostrar estadisticas
+    public String encontrar_salario_maximo(boolean dummy) throws Exception {
+        try {
+
+            if (cabeza == null) {
+                return "";
+            }
+            float maximo = cabeza.empleado.salario;
+            Nodo actual = cabeza;
+            // Recorrer la lista para encontrar el salario máximo
+            while (actual != null) {
+                if (actual.empleado.salario > maximo) {
+                    maximo = actual.empleado.salario;
+                }
+                actual = actual.siguiente;
+            }
+            // Retornar el salario máximo encontrado
+            return "Salario maximo: " + maximo;
+
+        } catch (Exception e) {
+            // Manejar excepciones y lanzar un mensaje de error personalizado
+            throw new Exception("Error al encontrar el salario máximo en Mostrar estadisticas: " + e);
+        }
+    }
+
+    public String encontrar_salario_minimo() throws Exception {
+        try {
+            // Verificar si la lista está vacía
+            if (cabeza == null) {
+                return "Lista vacía."; // Lanzar excepción si no hay empleados
+            }
+
+            float minimo = cabeza.empleado.salario; // Inicializar con el salario del primer empleado
+            Nodo actual = cabeza; // Puntero para recorrer la lista, comenzando desde la cabeza
+            Nodo minEmpleado = cabeza; // Guardará el nodo con el salario máximo
+
+            // Recorrer la lista para encontrar el salario mínimo
+            while (actual != null) {
+                if (actual.empleado.salario < minimo) {
+                    minimo = actual.empleado.salario; // Actualizar el salario mínimo si se encuentra uno menor
+                    minEmpleado = actual; // Guardar el nodo con el salario mínimo
+                }
+                actual = actual.siguiente; // Avanzar al siguiente nodo
+            }
+
+            // Retornar el salario mínimo encontrado
+            return "\nNombre: " + minEmpleado.empleado.nombre + "\n" +
+                    "Salario: " + minimo;
+
+        } catch (Exception e) {
+            // Manejar excepciones y lanzar un mensaje de error personalizado
+            throw new Exception("Error al encontrar el salario mínimo: " + e);
+        }
+    }
+
+    // Sobrecarga de Salario Min para mostrar estadisticas
+    public String encontrar_salario_minimo(boolean dummy) throws Exception {
+        try {
+            if (cabeza == null) {
+                return "";
+            }
+            float minimo = cabeza.empleado.salario;
+            Nodo actual = cabeza;
+            // Recorrer la lista para encontrar el salario mínimo
+            while (actual != null) {
+                if (actual.empleado.salario < minimo) {
+                    minimo = actual.empleado.salario;
+                }
+                actual = actual.siguiente; // Avanzar al siguiente nodo
+            }
+            // Retornar el salario mínimo encontrado
+            return "Salario minimo: " + minimo;
+
+        } catch (Exception e) {
+            // Manejar excepciones y lanzar un mensaje de error personalizado
+            throw new Exception("Error al encontrar el salario mínimo: " + e);
+        }
+    }
+
+    public String obtener_mediana_salario() throws Exception {
+        try {
+
+            // Verificar si la lista está vacía
+            if (cabeza == null) {
+                return "Lista vacía";
+            }
+
+            // Ordenar la lista por salario (ascendente)
+            this.OrdenarPorSalario(true);
+
+            // Crear un array para almacenar los salarios
+            int[] salarios = new int[contadorEmpleados];
+            int index = 0;
+
+            Nodo actual = cabeza;
+
+            // Recorrer la lista y almacenar los salarios en el array
+            while (actual != null) {
+
+                salarios[index++] = (int) actual.empleado.salario;
+                actual = actual.siguiente;
+            }
+
+            // Calcular la mediana
+            if (contadorEmpleados % 2 == 0) {
+
+                int mid = contadorEmpleados / 2 - 1;
+                // Si el número de empleados es par, la mediana es el promedio de los dos
+                // valores centrales
+                return "\nMediana: " + ((salarios[mid] + salarios[mid + 1]) / 2.0);
+            } else {
+                // Si el número de empleados es impar, la mediana es el valor central
+                int mid = contadorEmpleados / 2;
+                return "\nMediana: " + salarios[mid];
+            }
+
+        } catch (Exception e) {
+            throw new Exception("Error al calcular la mediana de salarios: " + e); // Manejar excepciones
+
+        }
+    }
 }

@@ -3,7 +3,7 @@ import javax.swing.JOptionPane;
 public class Main {
 
     public static final float salarioMin = 1423500;
-    public static int IdEmpleados = 0;
+    public static int IdEmpleados = 1;
 
     public static void main(String[] args) {
 
@@ -41,7 +41,6 @@ public class Main {
                                         Integer.parseInt(JOptionPane.showInputDialog(null,
                                                 "¿Cuál es el ID del empleado a eliminar?\n")))
                                         + lista.Imprimir());
-
                         break;
                     case 5:
                         // Ordenar por Nombre
@@ -63,21 +62,25 @@ public class Main {
                                         .toLowerCase()))
                                 + "\n"+lista.Imprimir());
                         break;
-                    case 7:
+                        case 7:
                         // Calcular promedio salario
-
+                        JOptionPane.showMessageDialog(null, "El promedio de los empleados es de: " + 
+                        lista.calcular_promedio_salario());
                         break;
                     case 8:
                         // Encontrar maximo
-
+                        JOptionPane.showMessageDialog(null, "El empleado con el salario más alto es " +
+                        lista.encontrar_salario_maximo());
                         break;
                     case 9:
                         // Encontrar minimo
-
+                        JOptionPane.showMessageDialog(null, "El empleado con el salario más bajo es " + 
+                        lista.encontrar_salario_minimo());
                         break;
                     case 10:
                         // Obtener mediana de Salario
-
+                        JOptionPane.showMessageDialog(null, "La mediana de los salarios es " 
+                        + lista.obtener_mediana_salario());
                         break;
                     case 11:
                         // Cargar datos
@@ -103,17 +106,22 @@ public class Main {
 
             String sOpcion = JOptionPane.showInputDialog(
                     """
-                            Menú:
+                        Menú:
+                            --- Operaciones ---
+                            
                             1. Añadir empleado a la lista
                             2. Imprimir lista
                             3. Buscar dato
                             4. Eliminar dato
+
+                            --- Consultas ---
+
                             5. Ordenar por nombre
                             6. Ordenar por salario
-                            7. Ordenar lista descendente
-                            8. Calcular la suma de los datos
-                            9. Calcular el producto de los datos
-                            10. Calcular el Rango de los Datos
+                            7. Calcular el salario promedio
+                            8. Encuentra el empleado con el salario máximo
+                            9. Encuentra el empleado con el salario mínimo
+                            10. Calcula la mediana de los salarios
 
                             11. Cargar datos
                             0. Salir
