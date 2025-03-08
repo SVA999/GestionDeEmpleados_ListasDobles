@@ -4,14 +4,14 @@ import java.io.IOException;
 
 public class ListaDoble {
 
-    public Nodo cabeza;
-    public Nodo cola;
+    public Nodo cabeza; // Puntero al primer nodo de la lista
+    public Nodo cola; // Puntero al último nodo de la lista
+    public int contadorEmpleados; // Contador para llevar la cuenta de empleados en la lista
 
-    public int contadorEmpleados;
-
+    // Constructor de la lista doblemente enlazada
     public ListaDoble() {
-        this.cabeza = null;
-        this.cola = null;
+        this.cabeza = null; // Inicializa la cabeza como null (lista vacía)
+        this.cola = null; // Inicializa la cola como null (lista vacía)
     }
 
     public String CargarDatos() throws Exception {
@@ -46,104 +46,114 @@ public class ListaDoble {
     public String InsertarEmpleado(Empleado empleado) throws Exception {
         try {
 
+            // Crear un nuevo nodo con el empleado proporcionado
             Nodo nuevoNodo = new Nodo(empleado);
 
+            // Si la lista está vacía, el nuevo nodo será la cabeza y la cola
             if (cabeza == null) {
                 cabeza = nuevoNodo;
                 cola = nuevoNodo;
-                contadorEmpleados++;
+                contadorEmpleados++; // Incrementar el contador de empleados
                 return "Empleado Insertado";
-            } else {
-                Nodo actual = cabeza;
 
+            } else {
+
+                // Recorrer la lista para verificar si el empleado ya existe (por ID)
+                Nodo actual = cabeza;
                 while (actual.siguiente != null) {
                     if (actual.empleado.id != empleado.id) {
-                        actual = actual.siguiente;
+                        actual = actual.siguiente; // Avanzar al siguiente nodo
                     } else {
-                        return "El Empleado ya existe";
+                        return "El Empleado ya existe"; // Si el empleado ya existe, retornar mensaje
                     }
                 }
 
+                // Insertar el nuevo nodo al final de la lista
                 cola.siguiente = nuevoNodo;
                 nuevoNodo.anterior = cola;
                 cola = nuevoNodo;
-                contadorEmpleados++;
+                contadorEmpleados++; // Incrementar el contador de empleados
                 return "Empleado insertado exitosamente";
             }
         } catch (Exception e) {
-            throw new Exception("Error al InsertarEmpleado:\n" + e);
+            throw new Exception("Error al InsertarEmpleado:\n" + e); // Manejar excepciones
         }
-
     }
 
     // Método para buscar un empleado en la lista
     public String BuscarEmpleado(int IdEmpleadoBuscado) throws Exception {
-
         try {
-            // Verificar lista vacia
+
+            // Verificar si la lista está vacía
             if (cabeza == null && cola == null) {
                 return "Lista vacía";
             }
 
+            // Recorrer la lista para buscar el empleado por ID
             Nodo actual = cabeza;
-
             while (actual != null) {
                 if (actual.empleado.id == IdEmpleadoBuscado) {
+
+                    // Si se encuentra, retornar la información del empleado
                     return "Empleado encontrado\n\tID: " + actual.empleado.id
                             + "\n\tNombre: " + actual.empleado.nombre
                             + "\n\tSalario: " + actual.empleado.salario;
                 }
-                actual = actual.siguiente;
+                actual = actual.siguiente; // Avanzar al siguiente nodo
             }
-            return "El Id del empleado " + IdEmpleadoBuscado + " no fue encontrado.";
+            return "El Id del empleado " + IdEmpleadoBuscado + " no fue encontrado."; // Si no se encuentra, retornar
+                                                                                      // mensaje
 
         } catch (Exception e) {
-            throw new Exception("Error al BuscarEmpleado:\n" + e);
+            throw new Exception("Error al BuscarEmpleado:\n" + e); // Manejar excepciones
         }
     }
 
     // Método para eliminar un empleado de la lista
     public String EliminarEmpleado(int IdEmpleadoEliminar) throws Exception {
         try {
+
+            // Verificar si la lista está vacía
             if (cabeza == null && cola == null) {
                 return "Lista vacía";
             }
-            Nodo actual = cabeza;
 
+            // Recorrer la lista para buscar el empleado por ID
+            Nodo actual = cabeza;
             while (actual != null) {
-                // Al encontrarlo
                 if (actual.empleado.id == IdEmpleadoEliminar) {
 
-                    // Lo encontro en la cabeza
+                    // Si el empleado está en la cabeza
                     if (actual.anterior == null) {
-                        cabeza = actual.siguiente;
+                        cabeza = actual.siguiente; // La cabeza ahora es el siguiente nodo
+
                     } else {
-                        // En otro nodo
-                        actual.anterior.siguiente = actual.siguiente;
+                        // Si el empleado está en otro nodo
+                        actual.anterior.siguiente = actual.siguiente; // Ajustar punteros
                     }
 
+                    // Si el empleado está en la cola
                     if (actual.siguiente == null) {
-                        // Lo encontro en la cola
-                        cola = actual.anterior;
+                        cola = actual.anterior; // La cola ahora es el nodo anterior
                     } else {
-                        actual.siguiente.anterior = actual.anterior;
+                        actual.siguiente.anterior = actual.anterior; // Ajustar punteros
                     }
-                    contadorEmpleados--;
-                    return "El empleado " + IdEmpleadoEliminar + " fue eliminado.";
-                }
-                // Si no lo encuentra pasa al siguiente
-                actual = actual.siguiente;
 
+                    contadorEmpleados--; // Decrementar el contador de empleados
+                    return "El empleado " + IdEmpleadoEliminar + " fue eliminado."; // Retornar mensaje de éxito
+                }
+                actual = actual.siguiente; // Avanzar al siguiente nodo
             }
-            return "El Id de empleado " + IdEmpleadoEliminar + " no fue encontrado.";
+            return "El Id de empleado " + IdEmpleadoEliminar + " no fue encontrado."; // Si no se encuentra, retornar
+                                                                                      // mensaje
+
         } catch (Exception e) {
-            throw new Exception("Error al EliminarEmpleado:\n" + e);
+            throw new Exception("Error al EliminarEmpleado:\n" + e); // Manejar excepciones
         }
     }
 
     // Método para Imprimir la lista
     public String Imprimir() throws Exception {
-
         try {
             // Verificar lista vacia
             if (cabeza == null && cola == null) {
@@ -222,20 +232,20 @@ public class ListaDoble {
 
             } else { // Ordenamiento Descendente
                 do {
-                    actual = cabeza;
+                    actual = cola;
                     intercambiado = false;
-                    while (actual.siguiente != null) {
+                    while (actual.anterior != null) {
                         // Comparar los nombres completos alfabéticamente
-                        if (actual.empleado.nombre.compareTo(actual.siguiente.empleado.nombre) < 0) {
+                        if (actual.empleado.nombre.compareTo(actual.anterior.empleado.nombre) > 0) {
                             // Intercambiar los nombres
                             // Intercambiar los nombres
                             temp = actual.empleado;
-                            actual.empleado = actual.siguiente.empleado;
-                            actual.siguiente.empleado = temp;
+                            actual.empleado = actual.anterior.empleado;
+                            actual.anterior.empleado = temp;
 
                             intercambiado = true;
                         }
-                        actual = actual.siguiente;
+                        actual = actual.anterior;
                     }
                 } while (intercambiado); // Repetir si se realizaron intercambios
 
@@ -281,19 +291,19 @@ public class ListaDoble {
 
             } else { // Ordenamiento Descendente
                 do {
-                    actual = cabeza;
+                    actual = cola;
                     intercambiado = false;
-                    while (actual.siguiente != null) {
+                    while (actual.anterior != null) {
                         // Comparar los salarios
-                        if (actual.empleado.salario < actual.siguiente.empleado.salario) {
+                        if (actual.empleado.salario > actual.anterior.empleado.salario) {
                             // Intercambiar los salarios
                             temp = actual.empleado;
-                            actual.empleado = actual.siguiente.empleado;
-                            actual.siguiente.empleado = temp;
+                            actual.empleado = actual.anterior.empleado;
+                            actual.anterior.empleado = temp;
 
                             intercambiado = true;
                         }
-                        actual = actual.siguiente;
+                        actual = actual.anterior;
                     }
                 } while (intercambiado); // Repetir si se realizaron intercambios
 

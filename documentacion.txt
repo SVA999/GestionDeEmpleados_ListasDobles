@@ -1,0 +1,32 @@
+Investigación y Documentación
+1. Revisión en Profundidad de las Listas Doblemente Ligadas
+
+Las listas doblemente ligadas son una estructura de datos en la que cada nodo contiene tres elementos: los datos, un puntero al nodo siguiente y un puntero al nodo anterior. Esto permite un recorrido bidireccional, a diferencia de las listas simplemente ligadas, que solo permiten recorridos unidireccionales (de inicio a fin).
+
+2. Ventajas de las Listas Doblemente Ligadas sobre las Listas Simplemente Ligadas
+
+En el contexto de este proyecto, las listas doblemente ligadas ofrecen varias ventajas:
+
+Recorrido en ambas direcciones: Permiten moverse hacia adelante y hacia atrás, lo que es útil para operaciones como el ordenamiento y la eliminación de nodos.
+
+Eliminación eficiente: Al tener un puntero al nodo anterior, no es necesario recorrer toda la lista para eliminar un nodo, como ocurre en las listas simplemente ligadas.
+
+Flexibilidad en operaciones: Facilitan la inserción y eliminación de nodos en cualquier posición, lo que es ideal para gestionar datos dinámicos como los empleados de una empresa.
+
+3. Facilitación del Ordenamiento y Recorrido Bidireccional
+
+Ordenamiento: Las listas doblemente ligadas permiten implementar algoritmos de ordenamiento (como el ordenamiento por inserción) de manera más eficiente, ya que se puede acceder tanto al nodo anterior como al siguiente durante el proceso.
+
+Recorrido bidireccional: Esto es especialmente útil para operaciones como la búsqueda y la eliminación, ya que se puede retroceder o avanzar según sea necesario. Por ejemplo, al buscar un empleado por ID, se puede recorrer la lista en ambas direcciones para optimizar el tiempo de búsqueda.
+
+4. Justificación de las Listas Doblemente Ligadas como Elección Óptima
+
+Las listas doblemente ligadas son la elección óptima para este proyecto debido a:
+
+Eficiencia en operaciones dinámicas: Las operaciones de inserción, eliminación y búsqueda son más rápidas y eficientes en comparación con las listas simplemente ligadas.
+
+Facilidad de ordenamiento: El ordenamiento por nombre o salario se beneficia de la capacidad de recorrer la lista en ambas direcciones.
+
+Escalabilidad: A medida que la empresa crece y el número de empleados aumenta, las listas doblemente ligadas garantizan un manejo eficiente de los datos sin comprometer el rendimiento.
+
+En resumen, las listas doblemente ligadas son ideales para este sistema de gestión de empleados, ya que proporcionan flexibilidad, eficiencia y facilidad de implementación para las operaciones requeridas.

@@ -107,7 +107,7 @@ public class Main {
 
                         <h3 style="color:#5a7ab4">--- Operaciones ---</h3>
                             <p style="color:#344667">1. Añadir empleado a la lista</p>
-                            <p style="color:#344667">2. Imprimir listal</p>
+                            <p style="color:#344667">2. Imprimir lista</p>
                             <p style="color:#344667">3. Buscar dato</p>
                             <p style="color:#344667">4. Eliminar dato</p>
 
