@@ -1,23 +1,50 @@
-Descripción General del Proyecto
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                            ✨ PROYECTO TECHSOLUTIONS INC. ✨                ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 
-    Este proyecto es un sistema de gestión de empleados para TechSolutions Inc., diseñado para manejar eficientemente la información de los empleados utilizando listas doblemente ligadas. Estas listas permiten operaciones rápidas como inserción, eliminación, búsqueda y ordenamiento. Además, el sistema calcula estadísticas clave: salario promedio, máximo, mínimo y mediana.
+◄► Descripción General del Proyecto ◄►
 
-    Se incluye una interfaz gráfica con JOptionPane para facilitar la interacción, y una función para cargar datos desde un archivo .txt, lo que agiliza la inserción de empleados cuando se tiene una lista predefinida. Esto mejora la usabilidad y reduce el tiempo de ingreso manual de datos.
+    Este proyecto es un sistema de gestión de empleados para TechSolutions Inc., 
+    diseñado para manejar eficientemente la información de los empleados utilizando 
+    listas doblemente ligadas. Estas listas permiten operaciones rápidas como:
+    ✔ Inserción
+    ✔ Eliminación
+    ✔ Búsqueda
+    ✔ Ordenamiento
 
-Instrucciones para Compilar y Ejecutar el Programa
-    Requisitos previos:
+    Además, el sistema calcula estadísticas clave:
+    ✔ Salario promedio
+    ✔ Salario máximo
+    ✔ Salario mínimo
+    ✔ Mediana
 
-    Asegúrate de tener instalado Java Development Kit (JDK) en tu sistema. Un entorno de desarrollo como IntelliJ IDEA, Eclipse o cualquier editor de texto con soporte para Java.
+    Se incluye una interfaz gráfica con JOptionPane para facilitar la interacción, 
+    y una función para cargar datos desde un archivo .txt, lo que agiliza la inserción 
+    de empleados cuando se tiene una lista predefinida. Esto mejora la usabilidad y 
+    reduce el tiempo de ingreso manual de datos.
 
-    Puedes compilarlo y ejecutarlo en tu IDE Favorito (Vscode remendado).
+◄► Instrucciones para Compilar y Ejecutar el Programa ◄►
 
-Decisiones de Diseño Importantes
+    ♦ Requisitos previos:
+        ✔ Java Development Kit (JDK) instalado.
+        ✔ Entorno de desarrollo como IntelliJ IDEA, Eclipse o VS Code (recomendado).
 
-    Interfaz Gráfica con JOptionPane
+    ♦ Pasos:
+        1. Abre el proyecto en tu IDE favorito.
+        2. Compila el código.
+        3. Ejecuta el programa.
 
-    Se decidió utilizar JOptionPane para la interfaz gráfica debido a su facilidad de implementación y su capacidad para proporcionar una experiencia de usuario intuitiva.
-    JOptionPane permite mostrar cuadros de diálogo para la entrada y salida de datos, lo que simplifica la interacción con el usuario sin necesidad de desarrollar una interfaz compleja. Esta elección fue clave para reducir el tiempo de desarrollo y mantener el enfoque en la lógica del sistema.
+◄► Decisiones de Diseño Importantes ◄►
 
-Función para Cargar Datos desde un Archivo .txt
+    ♦ Interfaz Gráfica con JOptionPane
+        ✔ Se eligió JOptionPane por su facilidad de implementación y experiencia de usuario intuitiva.
+        ✔ Permite mostrar cuadros de diálogo para entrada y salida de datos, simplificando la interacción.
 
-    Se agregó una función adicional para cargar datos desde un archivo .txt con el fin de mejorar la eficiencia al ingresar empleados. Esta función es útil cuando se tiene una lista predefinida de empleados, evitando la necesidad de ingresar manualmente cada uno. El formato del archivo es simple (nombre, ID, salario), lo que facilita su creación y modificación.
+    ♦ Función para Cargar Datos desde un Archivo .txt
+        ✔ Agiliza la inserción de empleados con listas predefinidas.
+        ✔ Formato simple: nombre, ID, salario.
+        ✔ Facilita la creación y modificación del archivo.
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                             ¡Gracias por usar nuestro sistema! 🚀            ║
+╚══════════════════════════════════════════════════════════════════════════════╝
