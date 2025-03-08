@@ -20,7 +20,7 @@ public class Main {
                     case 1:
                         // Insertar
                         JOptionPane.showMessageDialog(null, lista.InsertarEmpleado(new Empleado(
-                                JOptionPane.showInputDialog(null, "Ingresa el nombre"),
+                                JOptionPane.showInputDialog(null, "Ingresa el nombre").toUpperCase(),
                                 Float.parseFloat(JOptionPane.showInputDialog(null, "Ingresa el salario")))));
                         break;
                     case 2:
@@ -55,39 +55,36 @@ public class Main {
                     case 6:
                         // Ordenar por Salario
                         JOptionPane.showMessageDialog(null,
-                        lista.OrdenarPorSalario(
-                                Boolean.parseBoolean(JOptionPane.showInputDialog(null,
-                                        "Ordenamiento por Salario: " + "\ntrue - Ordenamiento Ascendente"
-                                                + "\nfalse - Ordenamiento Descendente\n")
-                                        .toLowerCase()))
-                                + "\n"+lista.Imprimir());
+                                lista.OrdenarPorSalario(
+                                        Boolean.parseBoolean(JOptionPane.showInputDialog(null,
+                                                "Ordenamiento por Salario: " + "\ntrue - Ordenamiento Ascendente"
+                                                        + "\nfalse - Ordenamiento Descendente\n")
+                                                .toLowerCase()))
+                                        + "\n" + lista.Imprimir());
                         break;
-                        case 7:
+                    case 7:
                         // Calcular promedio salario
-                        JOptionPane.showMessageDialog(null, "El promedio de los empleados es de: " + 
-                        lista.calcular_promedio_salario());
+                        JOptionPane.showMessageDialog(null, lista.calcular_promedio_salario());
                         break;
                     case 8:
                         // Encontrar maximo
-                        JOptionPane.showMessageDialog(null, "El empleado con el salario más alto es " +
-                        lista.encontrar_salario_maximo());
+                        JOptionPane.showMessageDialog(null, lista.encontrar_salario_maximo());
                         break;
                     case 9:
                         // Encontrar minimo
-                        JOptionPane.showMessageDialog(null, "El empleado con el salario más bajo es " + 
-                        lista.encontrar_salario_minimo());
+                        JOptionPane.showMessageDialog(null, lista.encontrar_salario_minimo());
                         break;
                     case 10:
                         // Obtener mediana de Salario
-                        JOptionPane.showMessageDialog(null, "La mediana de los salarios es " 
-                        + lista.obtener_mediana_salario());
+                        JOptionPane.showMessageDialog(null, "La mediana de los salarios es \n" +
+                                lista.obtener_mediana_salario());
                         break;
                     case 11:
                         // Cargar datos
-                        JOptionPane.showMessageDialog(null, lista.CargarDatos());
+                        JOptionPane.showMessageDialog(null, lista.CargarDatos(), "CARGA DE DATOS", 1);
                         break;
                     case 0:
-                        JOptionPane.showMessageDialog(null, "\tSaliendo del programa...");
+                        JOptionPane.showMessageDialog(null, "\tSaliendo del programa...", "SALIDA", 0);
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "\tOpción inválida.");
@@ -101,31 +98,32 @@ public class Main {
 
     // --------------------- METODOS ----------------------//
 
-    public static byte AbrirMenu(ListaDoble listaDoble) throws Exception{
+    public static byte AbrirMenu(ListaDoble listaDoble) throws Exception {
         try {
 
-            String sOpcion = JOptionPane.showInputDialog(
-                    """
-                        Menú:
-                            --- Operaciones ---
-                            
-                            1. Añadir empleado a la lista
-                            2. Imprimir lista
-                            3. Buscar dato
-                            4. Eliminar dato
+            String sOpcion = JOptionPane.showInputDialog(null, """
+                                        <html>
+                        <h2 style="color:#678bce">Menú:</h2>
 
-                            --- Consultas ---
+                        <h3 style="color:#5a7ab4">--- Operaciones ---</h3>
+                            <p style="color:#344667">1. Añadir empleado a la lista</p>
+                            <p style="color:#344667">2. Imprimir listal</p>
+                            <p style="color:#344667">3. Buscar dato</p>
+                            <p style="color:#344667">4. Eliminar dato</p>
 
-                            5. Ordenar por nombre
-                            6. Ordenar por salario
-                            7. Calcular el salario promedio
-                            8. Encuentra el empleado con el salario máximo
-                            9. Encuentra el empleado con el salario mínimo
-                            10. Calcula la mediana de los salarios
+                        <h3 style="color:#5a7ab4">--- Consultas ---</h3>
+                            <p style="color:#344667">5. Ordenar por nombre</p>
+                            <p style="color:#344667">6. Ordenar por salario</p>
+                            <p style="color:#344667">7. Calcular el salario promedio</p>
+                            <p style="color:#344667">8. Encuentra el empleado con el salario máximo</p>
+                            <p style="color:#344667">9. Encuentra el empleado con el salario mínimo</p>
+                            <p style="color:#344667">10. Calcula la mediana de los salarios</p>
 
-                            11. Cargar datos
-                            0. Salir
-                            """ + listaDoble.MostrarCaracteristicas());
+                        <h3 style="color:#5a7ab4">------------------</h3>
+                            <p style="color:#678bce">11. Cargar datos</p>
+                            <p style="color:#b45274">0. Salir</p>
+                    </html>
+                                        """ + listaDoble.MostrarCaracteristicas(), "MENU", 1);
 
             if (sOpcion == null) {
                 return 0;

@@ -25,7 +25,7 @@ public class ListaDoble {
                 while ((linea = br.readLine()) != null) {
                     // Dividir la línea por el punto y coma
                     String[] partes = linea.split(";");
-                    String nombre = partes[0];
+                    String nombre = partes[0].toUpperCase();
                     int salario = Integer.parseInt(partes[1]);
 
                     // Crear una Empleado y agregarla a la lista
@@ -176,10 +176,10 @@ public class ListaDoble {
             }
             reString += "\n|----- Estadisticas -----|\n";
             reString += "\n\tTotal empleados: " + contadorEmpleados;
-            reString += "\n\tSalario promedio: " + calcular_promedio_salario();
+            reString += "\n\t" + calcular_promedio_salario();
             reString += "\n\t" + encontrar_salario_maximo(true);
             reString += "\n\t" + encontrar_salario_minimo(true);
-            reString += "\t" + obtener_mediana_salario();
+            reString += "\n\t" + obtener_mediana_salario();
 
             return reString;
 
@@ -305,6 +305,52 @@ public class ListaDoble {
         }
     }
 
+    // Sobrecarga de orden ascendente para mostrar caracteristicas
+    public ListaDoble OrdenarPorSalario() throws Exception {
+        try {
+
+            ListaDoble listaDoble = new ListaDoble();
+
+            // Crear una lista copia para no mutar la original
+            Nodo actual = this.cabeza;
+
+            while (actual != null) {
+                listaDoble.InsertarEmpleado(actual.empleado);
+                actual = actual.siguiente;
+            }
+
+            if (listaDoble.cabeza == null || listaDoble.cabeza.siguiente == null) {
+                return listaDoble;
+            }
+
+            boolean intercambiado;
+            Empleado temp;
+
+            // Ordenamiento Asendente Defaut
+            do {
+                actual = listaDoble.cabeza;
+                intercambiado = false;
+                while (actual.siguiente != null) {
+                    // Comparar los salarios
+                    if (actual.empleado.salario > actual.siguiente.empleado.salario) {
+                        // Intercambiar los salarios
+                        temp = actual.empleado;
+                        actual.empleado = actual.siguiente.empleado;
+                        actual.siguiente.empleado = temp;
+
+                        intercambiado = true;
+                    }
+                    actual = actual.siguiente;
+                }
+            } while (intercambiado); // Repetir si se realizaron intercambios
+
+            return listaDoble;
+
+        } catch (Exception e) {
+            throw new Exception("Error al OrdenarPorSalario:\n" + e);
+        }
+    }
+
     public String calcular_promedio_salario() throws Exception {
 
         try {
@@ -324,7 +370,7 @@ public class ListaDoble {
             }
 
             // Calcular y retornar el promedio (suma de salarios / número de empleados)
-            return ""+sumaSalarios / contadorEmpleados;
+            return "Salario promedio: " + sumaSalarios / contadorEmpleados;
 
         } catch (Exception e) {
             // Manejar excepciones y lanzar un mensaje de error personalizado
@@ -353,7 +399,7 @@ public class ListaDoble {
             }
 
             // Retornar el salario máximo encontrado
-            return "\nNombre: " + maxEmpleado.empleado.nombre + "\n" +
+            return "El empleado con el salario más alto es: " + "\nNombre: " + maxEmpleado.empleado.nombre + "\n" +
                     "Salario: " + maximo;
 
         } catch (Exception e) {
@@ -408,7 +454,7 @@ public class ListaDoble {
             }
 
             // Retornar el salario mínimo encontrado
-            return "\nNombre: " + minEmpleado.empleado.nombre + "\n" +
+            return "El empleado con el salario más bajo es: " + "\nNombre: " + minEmpleado.empleado.nombre + "\n" +
                     "Salario: " + minimo;
 
         } catch (Exception e) {
@@ -444,19 +490,19 @@ public class ListaDoble {
     public String obtener_mediana_salario() throws Exception {
         try {
 
+            // Ordenar la lista por salario (ascendente)
+            ListaDoble listaDobleM = OrdenarPorSalario();
+
             // Verificar si la lista está vacía
-            if (cabeza == null) {
+            if (listaDobleM.cabeza == null) {
                 return "Lista vacía";
             }
-
-            // Ordenar la lista por salario (ascendente)
-            this.OrdenarPorSalario(true);
 
             // Crear un array para almacenar los salarios
             int[] salarios = new int[contadorEmpleados];
             int index = 0;
 
-            Nodo actual = cabeza;
+            Nodo actual = listaDobleM.cabeza;
 
             // Recorrer la lista y almacenar los salarios en el array
             while (actual != null) {
@@ -471,11 +517,11 @@ public class ListaDoble {
                 int mid = contadorEmpleados / 2 - 1;
                 // Si el número de empleados es par, la mediana es el promedio de los dos
                 // valores centrales
-                return "\nMediana: " + ((salarios[mid] + salarios[mid + 1]) / 2.0);
+                return "Mediana: " + ((salarios[mid] + salarios[mid + 1]) / 2.0);
             } else {
                 // Si el número de empleados es impar, la mediana es el valor central
                 int mid = contadorEmpleados / 2;
-                return "\nMediana: " + salarios[mid];
+                return "Mediana: " + salarios[mid];
             }
 
         } catch (Exception e) {
